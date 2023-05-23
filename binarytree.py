@@ -10,7 +10,6 @@ nullPointer = -1
 nextFree = 0
 
 def findNode(myTree, item, rootpointer, nullpointer):
-    found = False
     itemPointer = rootPointer
 
     while (myTree[itemPointer].data != item) and (itemPointer != nullPointer):
@@ -22,7 +21,7 @@ def findNode(myTree, item, rootpointer, nullpointer):
 
 def addNode(myTree, item):
     global rootPointer, nextFree
-    if nextFree <= len(myTree):
+    if nextFree <= len(myTree)-1:
         myTree[nextFree].leftPointer = -1
         myTree[nextFree].data = item
         myTree[nextFree].rightPointer = -1
@@ -71,3 +70,13 @@ def inOrder(pointer):
 
     if myTree[currentPointer].rightPointer != nullPointer:
         inOrder(myTree[currentPointer].rightPointer)
+
+def postOrder(pointer):
+    currentPointer = pointer
+    if myTree[currentPointer].leftPointer != nullPointer:
+        postOrder(myTree[currentPointer].leftPointer)
+    
+    if myTree[currentPointer].rightPointer != nullPointer:
+        postOrder(myTree[currentPointer].rightPointer)
+
+    print(myTree[currentPointer].data)
